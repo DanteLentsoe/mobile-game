@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
-import { View, Text, StyleSheet, Button, Alert } from "react-native";
+import { View, StyleSheet, Alert, Image } from "react-native";
+import MainButton from "../../components/buttons/mainButton";
 import NumberWrapper from "../../components/numberWrapper";
 import Card from "../../components/card";
+import TitleText from "../../components/text/titleText";
 
+//@ts-ignore
 const generateRandomNum = (min: number, max: number, exclude: number) => {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -62,17 +65,19 @@ const GameScreen = (props: any) => {
   return (
     <>
       <View style={styles.screen}>
-        <Text>Opponent's Guess</Text>
+        <TitleText>Opponent's Guess</TitleText>
         <NumberWrapper>{currentGuessNum}</NumberWrapper>
+        <Image
+          source={require("../../assets/undraw_Joyride_re_968t.png")}
+          style={styles.img}
+        />
         <Card style={styles.buttonContainer}>
-          <Button
-            title={"Lower"}
-            onPress={additionalGuessHandler.bind(this, "lower")}
-          />
-          <Button
-            title={"Greater"}
-            onPress={additionalGuessHandler.bind(this, "greater")}
-          />
+          <MainButton onPress={additionalGuessHandler.bind(this, "lower")}>
+            Lower
+          </MainButton>
+          <MainButton onPress={additionalGuessHandler.bind(this, "greater")}>
+            Greater
+          </MainButton>
         </Card>
       </View>
     </>
@@ -91,6 +96,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
     width: 300,
     maxWidth: "80%",
+  },
+  img: {
+    width: "90%",
+    height: "40%",
   },
 });
 
