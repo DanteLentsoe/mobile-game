@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import {
   View,
-  Text,
   StyleSheet,
   Button,
   TouchableWithoutFeedback,
   Keyboard,
+  Image,
   Alert,
 } from "react-native";
+import MainButton from "../../components/buttons/mainButton";
+import TextStyle from "../../components/text";
 import InputField from "../../components/input";
 import Colors from "../../utils/theme";
 import Card from "../../components/card";
 import NumberWrapper from "../../components/numberWrapper";
+import TitleText from "../../components/text/titleText";
 
 const StartGameScreen = (props: any) => {
   const [enteredValue, setEnteredValue] = useState<string>("");
@@ -59,14 +62,15 @@ const StartGameScreen = (props: any) => {
   if (confirmChoice) {
     validNum = (
       <Card style={styles.gameStartBox}>
-        <Text>Selected Number</Text>
+        <TextStyle style={styles.title}>Selected Number</TextStyle>
         <NumberWrapper>{selectedNum}</NumberWrapper>
-        <Button
-          title="Start Game"
+        <MainButton
           onPress={() => {
             props.startGame(selectedNum);
           }}
-        />
+        >
+          Start Game
+        </MainButton>
       </Card>
     );
   }
@@ -78,8 +82,12 @@ const StartGameScreen = (props: any) => {
         }}
       >
         <View style={styles.screen}>
+          <Image
+            source={require("../../assets/home_screen.png")}
+            style={styles.img}
+          />
           <Card style={styles.inputContainer}>
-            <Text style={styles.title}>Start a game</Text>
+            <TitleText>Start a game</TitleText>
             <InputField
               style={styles.input}
               blurOnSubmit
@@ -135,6 +143,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     marginVertical: 10,
+    fontFamily: "open-sans-bold",
   },
   buttonStyles: {
     width: 100,
@@ -146,6 +155,10 @@ const styles = StyleSheet.create({
   gameStartBox: {
     marginTop: 20,
     alignItems: "center",
+  },
+  img: {
+    width: "90%",
+    height: "40%",
   },
 });
 
